@@ -10,7 +10,6 @@ import UIKit
 
 let cellID = "tableViewCell"
 
-
 class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource {
 
     var tableView:UITableView?
@@ -94,6 +93,15 @@ class ViewController: UIViewController,UITableViewDelegate,UITableViewDataSource
             tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             tableView.reloadRows(at: [indexPath], with: .fade)
         }
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detalis = DetailsViewController()
+        detalis.person = self.personList[indexPath.row]
+        detalis.completionCallBlock={
+            self.tableView?.reloadData()
+        }
+        self.navigationController?.pushViewController(detalis , animated: true)
     }
 
 }
